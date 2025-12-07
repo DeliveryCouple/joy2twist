@@ -1,20 +1,19 @@
 /**:
   ros__parameters:
-    cmd_vel_topic: manual/cmd_vel
-    cmd_vel_stamped: false
+    cmd_vel_stamped: true
 
     linear_velocity_factor:
       fast: 2.0
-      regular: 1.2
-      slow: 0.4
+      regular: 0.5
+      slow: 1.5
 
     angular_velocity_factor:
       fast: 1.88
-      regular: 0.78
-      slow: 0.39
+      regular: 0.2
+      slow: 0.3
 
     e_stop:
-      present: true
+      present: false
       topic: hardware/e_stop
       reset_srv: hardware/e_stop_reset
       trigger_srv: hardware/e_stop_trigger
@@ -24,14 +23,21 @@
     # - optional negation '!',
     # - input type: 'A' for an axis or 'B' for a button,
     # - axis/button number.
+    # A0 - D-pad left-right
+    # A1 - D-pad up/down
+    # A2 - LT and RT button
+    # A3 - right joystick left/right
+    # A4 - right joystick up/down
+    # A6 - left joystick left/right
+    # A7 - left joystick up/down
     input_index_map:
       axis:
-        angular_z: 'A3' # Right joystick
-        linear_x: 'A1' # Left joystick
-        linear_y: 'A0' # Left joystick
+        angular_z: 'A3' # Right joystick left/right
+        linear_x: 'A1' # Left joystick left/right
+        linear_y: 'A0' # Left joystick up/down
       dead_man_switch: 'B4' # LB
-      fast_mode: '!A5' # RT
+      fast_mode: '!A2' # RT (part of A2 axis)
       slow_mode: 'B5' # RB
       e_stop_reset: 'B0' # A
       e_stop_trigger: 'B1' # B
-      enable_e_stop_reset: '!A2' # LT
+      enable_e_stop_reset: 'A2' # LT (part of A2 axis)
